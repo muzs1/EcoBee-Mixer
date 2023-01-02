@@ -3,39 +3,40 @@ namespace Eco.Mods.TechTree
 {
     using Eco.Gameplay.Components;
     using Eco.Gameplay.Items;
+    using Eco.Gameplay.Skills;
     using Eco.Shared.Localization;
     using System.Collections.Generic;
 
-    public partial class DirtRecipe : RecipeFamily
+    [RequiresSkill(typeof(BasicEngineeringSkill), 1)]
+    public partial class MixerAsphaltConcreteRecipe : RecipeFamily
     {
-        public DirtRecipe()
+        public MixerAsphaltConcreteRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Dirt Recipe",
-                Localizer.DoStr("Dirt Recipe"),
+                "MixerAsphaltConcrete",
+                Localizer.DoStr("MixerAsphaltConcrete"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CompostItem), 7,true),
-                    new IngredientElement(typeof(SandItem), 1,true),
-                    new IngredientElement(typeof(ClayItem), 1,true),
-                    new IngredientElement("CrushedRock", 1,true),
+                    new IngredientElement(typeof(CementItem), 24,true),
+                    new IngredientElement(typeof(SandItem), 47,true),
+                    new IngredientElement("CrushedRock", 119,true),
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<DirtItem>(10)
+                    new CraftingElement<AsphaltConcreteItem>(100)
                 });
             this.Recipes = new List<Recipe> { recipe };
-            this.LaborInCalories = CreateLaborInCaloriesValue(10);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
+            this.LaborInCalories = CreateLaborInCaloriesValue(1000);
+            this.CraftMinutes = CreateCraftTimeValue(15f);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Dirt Recipe"), typeof(DirtRecipe));
+            this.Initialize(Localizer.DoStr("Mixed Asphalt Concrete"), typeof(MixerAsphaltConcreteRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(MixerObject), this);
         }
 
         partial void ModsPreInitialize();
-      
+
         partial void ModsPostInitialize();
     }
 }
