@@ -1,3 +1,4 @@
+//ECOBee
 namespace Eco.Mods.TechTree
 {
     using Eco.Core.Items;
@@ -24,7 +25,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(PowerConsumptionComponent))]
     public partial class MixerObject : WorldObject, IRepresentsItem
     {
-        public virtual Type RepresentedItemType => typeof(Mixer);
+        public virtual Type RepresentedItemType => typeof(MixerItem);
         public override LocString DisplayName => Localizer.DoStr("Mixer");
         public override TableTextureMode TableTexture => TableTextureMode.Wood;
 
@@ -45,7 +46,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Mixer")]
     [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true)]
-    public partial class Mixer : WorldObjectItem<MixerObject>
+    public partial class MixerItem : WorldObjectItem<MixerObject>
     {
         public override LocString DisplayDescription => Localizer.DoStr("Electric mixer for speeding up road production.");
 
@@ -71,7 +72,7 @@ namespace Eco.Mods.TechTree
                 },
                 new List<CraftingElement>
                 {
-                    new CraftingElement<Mixer>()
+                    new CraftingElement<MixerItem>()
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.ExperienceOnCraft = 20;
