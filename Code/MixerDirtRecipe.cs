@@ -12,8 +12,8 @@ namespace Eco.Mods.TechTree
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Dirt Recipe",
-                Localizer.DoStr("Dirt Recipe"),
+                "Dirt",
+                Localizer.DoStr("Dirt"),
                 new List<IngredientElement>
                 {
                     new IngredientElement(typeof(CompostItem), 7,true),
@@ -29,7 +29,7 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(10);
             this.CraftMinutes = CreateCraftTimeValue(0.5f);
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Dirt Recipe"), typeof(DirtRecipe));
+            this.Initialize(Localizer.DoStr("Dirt"), typeof(DirtRecipe));
             this.ModsPostInitialize();
             CraftingComponent.AddRecipe(typeof(MixerObject), this);
         }
