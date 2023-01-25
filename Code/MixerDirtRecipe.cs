@@ -16,10 +16,8 @@ namespace Eco.Mods.TechTree
                 Localizer.DoStr("Dirt"),
                 new List<IngredientElement>
                 {
-                    new IngredientElement(typeof(CompostItem), 7,true),
-                    new IngredientElement(typeof(SandItem), 1,true),
-                    new IngredientElement(typeof(ClayItem), 1,true),
-                    new IngredientElement("CrushedRock", 1,true),
+                    new IngredientElement(typeof(CompostItem), 15,true),
+                    new IngredientElement("CrushedRock", 5,true),
                 },
                 new List<CraftingElement>
                 {
@@ -27,7 +25,8 @@ namespace Eco.Mods.TechTree
                 });
             this.Recipes = new List<Recipe> { recipe };
             this.LaborInCalories = CreateLaborInCaloriesValue(10);
-            this.CraftMinutes = CreateCraftTimeValue(0.5f);
+            //this.CraftMinutes = CreateCraftTimeValue(0.5f);
+            this.CraftMinutes = CreateCraftTimeValue(beneficiary: typeof(DirtRecipe), start: 1, skillType: typeof(BasicEngineeringSkill), typeof(BasicEngineeringFocusedSpeedTalent), typeof(BasicEngineeringParallelSpeedTalent));
             this.ModsPreInitialize();
             this.Initialize(Localizer.DoStr("Dirt"), typeof(DirtRecipe));
             this.ModsPostInitialize();

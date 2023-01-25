@@ -5,6 +5,7 @@ namespace Eco.Mods.TechTree
     using Eco.Gameplay.Components;
     using Eco.Gameplay.Components.Auth;
     using Eco.Gameplay.Items;
+    using Eco.Gameplay.Modules;
     using Eco.Gameplay.Objects;
     using Eco.Gameplay.Skills;
     using Eco.Shared.Items;
@@ -23,6 +24,7 @@ namespace Eco.Mods.TechTree
     [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(PowerGridComponent))]
     [RequireComponent(typeof(PowerConsumptionComponent))]
+    [RequireComponent(typeof(PluginModulesComponent))]
     public partial class MixerObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(MixerItem);
@@ -46,6 +48,7 @@ namespace Eco.Mods.TechTree
     [Serialized]
     [LocDisplayName("Mixer")]
     [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true)]
+    [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MixerAdvancedUpgradeItem) })]
     public partial class MixerItem : WorldObjectItem<MixerObject>
     {
         public override LocString DisplayDescription => Localizer.DoStr("Electric mixer for speeding up road production.");
