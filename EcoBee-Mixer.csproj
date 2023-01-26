@@ -7,6 +7,8 @@
     <Nullable>enable</Nullable>
     <BaseOutputPath></BaseOutputPath>
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+    <AssemblyVersion></AssemblyVersion>
+    <Version>1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
