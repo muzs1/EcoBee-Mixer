@@ -12,8 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Ref\**" />
     <Compile Remove="UnityFile\**" />
+    <EmbeddedResource Remove="Ref\**" />
     <EmbeddedResource Remove="UnityFile\**" />
+    <None Remove="Ref\**" />
     <None Remove="UnityFile\**" />
   </ItemGroup>
 
@@ -25,8 +28,5 @@
     <None Remove="VisualStudio.gitignore" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Eco.ReferenceAssemblies" Version="0.9.7.6-beta-release-420" />
-  </ItemGroup>
 
 </Project>

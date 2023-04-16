@@ -1,0 +1,37 @@
+<Project>
+    <ItemGroup>
+        <Reference Include="Eco.Core">
+            <HintPath>Ref\Eco.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.Gameplay">
+            <HintPath>Ref\Eco.Gameplay.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.ModKit">
+            <HintPath>Ref\Eco.ModKit.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.Mods">
+            <HintPath>Ref\Eco.Mods.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.Plugins">
+            <HintPath>Ref\Eco.Plugins.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.Shared">
+            <HintPath>Ref\Eco.Shared.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.Simulation">
+            <HintPath>Ref\Eco.Simulation.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.Stats">
+            <HintPath>Ref\Eco.Stats.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.World">
+            <HintPath>Ref\Eco.World.dll</HintPath>
+        </Reference>
+        <Reference Include="Eco.WorldGenerator">
+            <HintPath>Ref\Eco.WorldGenerator.dll</HintPath>
+        </Reference>
+        <Reference Include="EcoServer">
+            <HintPath>Ref\EcoServer.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+</Project>
