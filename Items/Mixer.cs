@@ -14,6 +14,7 @@ using Eco.Shared.Items;
 using Eco.Gameplay.Systems.NewTooltip;
 using Eco.Core.Controller;
 using Eco.Mods.TechTree;
+using Eco.Gameplay.Occupancy;
 
 namespace EcoBee.Mixer.Items
 {
@@ -25,7 +26,6 @@ namespace EcoBee.Mixer.Items
     [RequireComponent(typeof(CraftingComponent))]
     [RequireComponent(typeof(PowerGridComponent))]
     [RequireComponent(typeof(PowerConsumptionComponent))]
-    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(PluginModulesComponent))]
     [RequireComponent(typeof(RoomRequirementsComponent))]
     [Ecopedia("Work Stations", "Craft Tables", subPageName: "Mixer Item")]
@@ -55,11 +55,7 @@ namespace EcoBee.Mixer.Items
     public partial class MixerItem : WorldObjectItem<MixerObject>, IPersistentData
     {
         public override LocString DisplayDescription => Localizer.DoStr("Electric mixer for speeding up road production.");
-
-
-        public override DirectionAxisFlags RequiresSurfaceOnSides { get; } = 0
-                    | DirectionAxisFlags.Down
-                ;
+        protected override OccupancyContext GetOccupancyContext => new SideAttachedContext(0 | DirectionAxisFlags.Down, WorldObject.GetOccupancyInfo(this.WorldObjectType));
 
         [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(1000)}w of {new ElectricPower().Name} power");
         [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
