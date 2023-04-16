@@ -1,79 +1,89 @@
-//ECOBee
-namespace Eco.Mods.TechTree
-{
-    using Eco.Core.Items;
-    using Eco.Gameplay.Components;
-    using Eco.Gameplay.Components.Auth;
-    using Eco.Gameplay.Items;
-    using Eco.Gameplay.Modules;
-    using Eco.Gameplay.Objects;
-    using Eco.Gameplay.Skills;
-    using Eco.Shared.Items;
-    using Eco.Shared.Localization;
-    using Eco.Shared.Math;
-    using Eco.Shared.Serialization;
-    using System;
-    using System.Collections.Generic;
+using Eco.Core.Items;
+using Eco.Gameplay.Components;
+using Eco.Gameplay.Components.Auth;
+using Eco.Gameplay.Items;
+using Eco.Gameplay.Modules;
+using Eco.Gameplay.Objects;
+using Eco.Gameplay.Skills;
+using Eco.Gameplay.Systems.Tooltip;
+using Eco.Shared.Math;
+using Eco.Shared.Localization;
+using Eco.Shared.Serialization;
+using Eco.Shared.Utils;
+using Eco.Shared.Items;
+using Eco.Gameplay.Systems.NewTooltip;
+using Eco.Core.Controller;
+using Eco.Mods.TechTree;
 
+namespace EcoBee.Mixer.Items
+{
     [Serialized]
     [RequireComponent(typeof(OnOffComponent))]
     [RequireComponent(typeof(PropertyAuthComponent))]
     [RequireComponent(typeof(MinimapComponent))]
     [RequireComponent(typeof(LinkComponent))]
     [RequireComponent(typeof(CraftingComponent))]
-    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(PowerGridComponent))]
     [RequireComponent(typeof(PowerConsumptionComponent))]
+    [RequireComponent(typeof(SolidAttachedSurfaceRequirementComponent))]
     [RequireComponent(typeof(PluginModulesComponent))]
+    [RequireComponent(typeof(RoomRequirementsComponent))]
+    [Ecopedia("Work Stations", "Craft Tables", subPageName: "Mixer Item")]
     public partial class MixerObject : WorldObject, IRepresentsItem
     {
         public virtual Type RepresentedItemType => typeof(MixerItem);
         public override LocString DisplayName => Localizer.DoStr("Mixer");
-        public override TableTextureMode TableTexture => TableTextureMode.Wood;
+        public override TableTextureMode TableTexture => TableTextureMode.Metal;
 
         protected override void Initialize()
         {
-            this.GetComponent<PowerConsumptionComponent>().Initialize(1000);
-            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
             this.ModsPreInitialize();
             this.GetComponent<MinimapComponent>().SetCategory(Localizer.DoStr("Crafting"));
+            this.GetComponent<PowerConsumptionComponent>().Initialize(1000);
+            this.GetComponent<PowerGridComponent>().Initialize(10, new ElectricPower());
             this.ModsPostInitialize();
         }
 
         partial void ModsPreInitialize();
-
         partial void ModsPostInitialize();
     }
 
     [Serialized]
     [LocDisplayName("Mixer")]
     [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true)]
-    [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MixerAdvancedUpgradeItem) })]
-    public partial class MixerItem : WorldObjectItem<MixerObject>
+    [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MixerAdvancedUpgradeItem) })] //noloc
+    public partial class MixerItem : WorldObjectItem<MixerObject>, IPersistentData
     {
         public override LocString DisplayDescription => Localizer.DoStr("Electric mixer for speeding up road production.");
+
 
         public override DirectionAxisFlags RequiresSurfaceOnSides { get; } = 0
                     | DirectionAxisFlags.Down
                 ;
+
+        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(1000)}w of {new ElectricPower().Name} power");
+        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
     }
 
     [RequiresSkill(typeof(MechanicsSkill), 4)]
+    [Ecopedia("Work Stations", "Craft Tables", subPageName: "Mixer Item")]
     public partial class MixerRecipe : RecipeFamily
     {
         public MixerRecipe()
         {
             var recipe = new Recipe();
             recipe.Init(
-                "Mixer",
-                Localizer.DoStr("Mixer"),
-                new List<IngredientElement>
+                name: "Mixer",
+                displayName: Localizer.DoStr("Mixer"),
+
+                ingredients: new List<IngredientElement>
                 {
                     new IngredientElement(typeof(GearboxItem), 10, typeof(MechanicsSkill), typeof(MechanicsLavishResourcesTalent)),
                     new IngredientElement(typeof(PistonItem), 5, typeof(MechanicsSkill), typeof(MechanicsLavishResourcesTalent)),
                     new IngredientElement(typeof(IronBarItem), 25, typeof(MechanicsSkill), typeof(MechanicsLavishResourcesTalent)),
                 },
-                new List<CraftingElement>
+
+                items: new List<CraftingElement>
                 {
                     new CraftingElement<MixerItem>()
                 });
@@ -82,13 +92,14 @@ namespace Eco.Mods.TechTree
             this.LaborInCalories = CreateLaborInCaloriesValue(600, typeof(MechanicsSkill));
             this.CraftMinutes = CreateCraftTimeValue(typeof(MixerRecipe), 100, typeof(MechanicsSkill), typeof(MechanicsFocusedSpeedTalent), typeof(MechanicsParallelSpeedTalent));
             this.ModsPreInitialize();
-            this.Initialize(Localizer.DoStr("Mixer"), typeof(MixerRecipe));
+            this.Initialize(displayText: Localizer.DoStr("Mixer"), recipeType: typeof(MixerRecipe));
             this.ModsPostInitialize();
-            CraftingComponent.AddRecipe(typeof(AssemblyLineObject), this);
+
+            CraftingComponent.AddRecipe(tableType: typeof(AssemblyLineObject), recipe: this);
         }
 
         partial void ModsPreInitialize();
-        
+
         partial void ModsPostInitialize();
     }
 }

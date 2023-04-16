@@ -1,11 +1,11 @@
-//ECOBee
-namespace Eco.Mods.TechTree
-{
-    using Eco.Gameplay.Components;
-    using Eco.Gameplay.Items;
-    using Eco.Shared.Localization;
-    using System.Collections.Generic;
+using Eco.Gameplay.Components;
+using Eco.Gameplay.Items;
+using Eco.Mods.TechTree;
+using Eco.Shared.Localization;
+using EcoBee.Mixer.Items;
 
+namespace EcoBee.Mixer.Recipes
+{
     public partial class DirtRecipe : RecipeFamily
     {
         public DirtRecipe()

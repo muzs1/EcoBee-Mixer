@@ -1,12 +1,12 @@
-//ECOBee
-namespace Eco.Mods.TechTree
-{
-    using Eco.Gameplay.Components;
-    using Eco.Gameplay.Items;
-    using Eco.Gameplay.Skills;
-    using Eco.Shared.Localization;
-    using System.Collections.Generic;
+using Eco.Gameplay.Components;
+using Eco.Gameplay.Items;
+using Eco.Gameplay.Skills;
+using Eco.Mods.TechTree;
+using Eco.Shared.Localization;
+using EcoBee.Mixer.Items;
 
+namespace EcoBee.Mixer.Recipes
+{
     [RequiresSkill(typeof(BasicEngineeringSkill), 1)]
     public partial class MixerAsphalt1ConcreteRecipe : RecipeFamily
     {

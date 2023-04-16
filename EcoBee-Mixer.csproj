@@ -1,15 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
-    <RootNamespace>EcoBee_Mixer</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <BaseOutputPath></BaseOutputPath>
-    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
-    <AssemblyVersion></AssemblyVersion>
-    <Version>1.1.1</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<RootNamespace>EcoBee.Mixer</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyTitle>EcoBee.Mixer</AssemblyTitle>
+		<Product>EcoBee.Mixer</Product>
+		<Authors>MUZS1</Authors>
+		<Company>MUZS1</Company>
+		<Description>A Mixer mod used for making roads on Eco Bee server.</Description>
+		<Copyright>Copyright © 2023 MUZS1</Copyright>
+		<SignAssembly>false</SignAssembly>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
+		<MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
+	</PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Ref\**" />
@@ -21,11 +28,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Items\Mixer OLD.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".gitattributes" />
     <None Remove=".gitignore" />
     <None Remove="csharp.gitignore" />
+    <None Remove="Directory.Build.props" />
     <None Remove="LICENSE" />
     <None Remove="VisualStudio.gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Items\Mixer OLD.cs" />
   </ItemGroup>
 
 
