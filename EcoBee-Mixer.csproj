@@ -27,9 +27,6 @@
     <None Remove="UnityFile\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Items\Mixer OLD.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Remove=".gitattributes" />
@@ -38,10 +35,6 @@
     <None Remove="Directory.Build.props" />
     <None Remove="LICENSE" />
     <None Remove="VisualStudio.gitignore" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Items\Mixer OLD.cs" />
   </ItemGroup>
 
 
