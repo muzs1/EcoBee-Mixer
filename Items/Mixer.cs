@@ -5,7 +5,6 @@ using Eco.Gameplay.Items;
 using Eco.Gameplay.Modules;
 using Eco.Gameplay.Objects;
 using Eco.Gameplay.Skills;
-using Eco.Gameplay.Systems.Tooltip;
 using Eco.Shared.Math;
 using Eco.Shared.Localization;
 using Eco.Shared.Serialization;
@@ -15,6 +14,7 @@ using Eco.Gameplay.Systems.NewTooltip;
 using Eco.Core.Controller;
 using Eco.Mods.TechTree;
 using Eco.Gameplay.Occupancy;
+using Eco.Gameplay.Items.Recipes;
 
 namespace EcoBee.Mixer.Items
 {
@@ -50,15 +50,15 @@ namespace EcoBee.Mixer.Items
 
     [Serialized]
     [LocDisplayName("Mixer")]
+    [LocDescription("Electric mixer for speeding up road production.")]
     [Ecopedia("Work Stations", "Craft Tables", createAsSubPage: true)]
     [AllowPluginModules(Tags = new[] { "AdvancedUpgrade" }, ItemTypes = new[] { typeof(MixerAdvancedUpgradeItem) })] //noloc
     public partial class MixerItem : WorldObjectItem<MixerObject>, IPersistentData
     {
-        public override LocString DisplayDescription => Localizer.DoStr("Electric mixer for speeding up road production.");
         protected override OccupancyContext GetOccupancyContext => new SideAttachedContext(0 | DirectionAxisFlags.Down, WorldObject.GetOccupancyInfo(this.WorldObjectType));
 
-        [Tooltip(7)] private LocString PowerConsumptionTooltip => Localizer.Do($"Consumes: {Text.Info(1000)}w of {new ElectricPower().Name} power");
-        [Serialized, SyncToView, TooltipChildren, NewTooltipChildren(CacheAs.Instance)] public object PersistentData { get; set; }
+        [NewTooltip(CacheAs.SubType, 7)] public static LocString PowerConsumptionTooltip() => Localizer.Do($"Consumes: {Text.Info(1000)}w of {new ElectricPower().Name} power");
+        [Serialized, SyncToView, NewTooltipChildren(CacheAs.Instance, flags: TTFlags.AllowNonControllerTypeForChildren)] public object PersistentData { get; set; }
     }
 
     [RequiresSkill(typeof(MechanicsSkill), 4)]

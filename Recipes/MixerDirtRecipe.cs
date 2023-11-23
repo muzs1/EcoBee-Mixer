@@ -1,5 +1,6 @@
 using Eco.Gameplay.Components;
 using Eco.Gameplay.Items;
+using Eco.Gameplay.Items.Recipes;
 using Eco.Mods.TechTree;
 using Eco.Shared.Localization;
 using EcoBee.Mixer.Items;

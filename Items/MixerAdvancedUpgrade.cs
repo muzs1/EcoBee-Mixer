@@ -6,6 +6,7 @@ using Eco.Gameplay.Skills;
 using Eco.Mods.TechTree;
 using Eco.Shared.Localization;
 using Eco.Shared.Serialization;
+using Eco.Gameplay.Items.Recipes;
 
 namespace EcoBee.Mixer.Items
 {
@@ -61,14 +62,15 @@ namespace EcoBee.Mixer.Items
 
     [Serialized]
     [LocDisplayName("Mixer Advanced Upgrade")]
+    [LocDescription("Advanced Upgrade that greatly increases efficiency when crafting Upgrade recipes.")]
     [Weight(1)]
     [Ecopedia("Upgrade Modules", "Specialty Upgrades", createAsSubPage: true)]                                                                      //_If_EcopediaPage_
-    [Tag("Upgrade", 1)]
+    [Tag("Upgrade")]
+    [Tag("AdvancedUpgrade")]
     public partial class MixerAdvancedUpgradeItem :
         EfficiencyModule
     {
-        public override LocString DisplayDescription { get { return Localizer.DoStr("Advanced Upgrade that greatly increases efficiency when crafting Upgrade recipes."); } }
-
+       
         public MixerAdvancedUpgradeItem() : base(
             ModuleTypes.ResourceEfficiency | ModuleTypes.SpeedEfficiency,
             0.5f + 0.05f,
